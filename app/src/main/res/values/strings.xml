@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Barebone</string>
+    <string name="LOGINtext">LOGIN</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="emailController">emailController</string>
+    <string name="pleaseLoginText">Please login to your account</string>
+    <string name="forgotPasswordText">Forgot Password?</string>
+    <string name="ORtext">OR</string>
+    <string name="dontHaveAnAccount">Don\'t have an account? </string>
+    <string name="registerText">Register</string>
+    <string name="REGISTERText">REGISTER</string>
+    <string name="pleaseRegister">Please enter details to register</string>
+    <string name="NameText">Name</string>
+    <string name="MobileNumberText">Mobile Number</string>
+    <string name="confirmPasswordText">Confirm Password</string>
+    <string name="alreadyHaveAccountText">Already have an account? </string>
+    <string name="LoginText">Login</string>
+</resources>
