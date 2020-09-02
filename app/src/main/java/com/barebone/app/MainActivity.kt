@@ -1,24 +1,96 @@
 package com.barebone.app
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.provider.MediaStore
+import android.util.Log
+import android.widget.EditText
 import android.widget.TextView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
-const val REQUEST_IMAGE_CAPTURE = 1
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var register = findViewById<TextView>(R.id.register)
-        register.setOnClickListener(){
+        val login = findViewById<TextView>(R.id.login)
+        login.setOnClickListener {
+            val email = findViewById<EditText>(R.id.email).text
+            val password = findViewById<EditText>(R.id.password).text
+            sharedPref = getSharedPreferences(
+                "${packageName}.$email",
+                Context.MODE_PRIVATE
+            )
+            Log.d("msg", sharedPref.toString())
+            if (sharedPref.getString(
+                    "email",
+                    resources.getString(R.string.defaultValue)
+                ) == email.toString()
+            ) {
+                //Email Exists
+                if (sharedPref.getString(
+                        "password",
+                        resources.getString(R.string.defaultValue)
+                    ) == password.toString()
+                ) {
+                    //password matched
+                    login()
+                } else {
+                    //Password doesn't match
+                    Toast.makeText(applicationContext, "Password doesn't match", Toast.LENGTH_LONG)
+                        .show()
+                }
+
+            } else {
+                //Email not exist
+                Toast.makeText(applicationContext, "Email not exist", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        val register = findViewById<TextView>(R.id.register)
+        register.setOnClickListener {
+
             val intent = Intent(this, Register::class.java)
             startActivity(intent)
         }
 
-        }
     }
+
+    private fun login() {
+        val intent = Intent(this, Dashboard::class.java)
+        intent.putExtra(
+            "name", sharedPref.getString(
+                "name",
+                resources.getString(R.string.defaultValue)
+            )
+        )
+        intent.putExtra(
+            "email", sharedPref.getString(
+                "email",
+                resources.getString(R.string.defaultValue)
+            )
+        )
+        intent.putExtra(
+            "mobile", sharedPref.getString(
+                "mobile",
+                resources.getString(R.string.defaultValue)
+            )
+        )
+        intent.putExtra(
+            "gender", sharedPref.getString(
+                "gender",
+                resources.getString(R.string.defaultValue)
+            )
+        )
+        finish()
+        startActivity(intent)
+        Toast.makeText(applicationContext, "Login success", Toast.LENGTH_LONG).show()
+    }
+}
+

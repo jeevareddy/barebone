@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,7 +40,7 @@
             android:layout_marginTop="24dp"
             android:hint="@string/NameText">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,13 +49,34 @@
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="@string/Gender"
+                android:textSize="14sp"></TextView>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/gender"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+
+                />
+        </LinearLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:hint="@string/Email">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,7 +92,7 @@
             android:layout_marginTop="18dp"
             android:hint="@string/MobileNumberText">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +108,7 @@
             android:layout_marginTop="18dp"
             android:hint="@string/Password">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,7 +124,7 @@
             android:layout_marginTop="18dp"
             android:hint="@string/confirmPasswordText">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/confirmPassowrd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -114,6 +135,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
