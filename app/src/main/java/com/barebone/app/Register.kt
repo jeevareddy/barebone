@@ -71,6 +71,12 @@ class Register : AppCompatActivity() {
                 "Email cannot be empty",
                 Toast.LENGTH_LONG
             ).show()
+            !android.util.Patterns.EMAIL_ADDRESS.matcher(user[0].email.text.toString())
+                .matches() -> Toast.makeText(
+                applicationContext,
+                "Invalid Email",
+                Toast.LENGTH_LONG
+            ).show()
             user[0].mobile.text.isNullOrEmpty() -> Toast.makeText(
                 applicationContext,
                 "Mobile Number cannot be empty",
