@@ -43,7 +43,7 @@ class Register : AppCompatActivity() {
 
                 findViewById(R.id.password),
 
-                findViewById(R.id.confirmPassowrd)
+                findViewById(R.id.confirmPassword)
             )
 
             validate(user)

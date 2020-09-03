@@ -1,6 +1,5 @@
 package com.barebone.app
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             val password = findViewById<EditText>(R.id.password).text
             sharedPref = getSharedPreferences(
                 "${packageName}.$email",
-                Context.MODE_PRIVATE
+                MODE_PRIVATE
             )
             Log.d("msg", sharedPref.toString())
             if (sharedPref.getString(
@@ -43,13 +42,36 @@ class MainActivity : AppCompatActivity() {
                     login()
                 } else {
                     //Password doesn't match
-                    Toast.makeText(applicationContext, "Password doesn't match", Toast.LENGTH_LONG)
+                    Toast.makeText(applicationContext, "Invalid password", Toast.LENGTH_LONG)
                         .show()
                 }
 
             } else {
                 //Email not exist
                 Toast.makeText(applicationContext, "Email not exist", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        findViewById<TextView>(R.id.forgotPassword).setOnClickListener {
+            val email = findViewById<EditText>(R.id.email)
+            if (email.text.isNullOrEmpty()) {
+                Toast.makeText(applicationContext, "Enter your email", Toast.LENGTH_LONG).show()
+            } else {
+                sharedPref = getSharedPreferences(
+                    "${packageName}.${email.text}",
+                    MODE_PRIVATE
+                )
+                if (sharedPref.getString(
+                        "email",
+                        "@string/defaultValue"
+                    ) != email.text.toString()
+                ) {
+                    Toast.makeText(applicationContext, "Invalid email", Toast.LENGTH_LONG).show()
+                } else {
+                    val intent = Intent(this, ForgotPassword::class.java)
+                    intent.putExtra("email", email.text.toString())
+                    startActivity(intent)
+                }
             }
         }
 
