@@ -131,7 +131,7 @@ class UserListAdapter(private val appContext: Dashboard) :
             //set title for alert dialog
             builder.setTitle(R.string.dialogTitle)
             //set message for alert dialog
-            builder.setMessage(R.string.dialogMessage)
+            builder.setMessage("Confirm to delete ${name.text}")
             builder.setIcon(android.R.drawable.ic_dialog_alert)
 
             //performing positive action
@@ -169,6 +169,7 @@ class UserListAdapter(private val appContext: Dashboard) :
             // Set other dialog properties
             alertDialog.setCancelable(false)
             alertDialog.show()
+
         }
     }
 

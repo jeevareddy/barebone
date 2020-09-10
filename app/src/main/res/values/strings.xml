@@ -37,5 +37,5 @@
     <string name="validate">Validate</string>
     <string name="editText">Edit</string>
     <string name="dialogTitle">Delete</string>
-    <string name="dialogMessage">Confirm to delete</string>
+
 </resources>
