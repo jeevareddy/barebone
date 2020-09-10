@@ -32,8 +32,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="welcome">Welcome</string>
+    <string name="welcome">Welcome,    </string>
     <string name="ForgotPassword">Forgot Password</string>
     <string name="validate">Validate</string>
-
+    <string name="editText">Edit</string>
+    <string name="dialogTitle">Delete</string>
+    <string name="dialogMessage">Confirm to delete</string>
 </resources>

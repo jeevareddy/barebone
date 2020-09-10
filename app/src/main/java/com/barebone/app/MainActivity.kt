@@ -1,5 +1,6 @@
 package com.barebone.app
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +19,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        var persistantlogin = this.getPreferences(Context.MODE_PRIVATE)
+        Log.d("sp", getPreferences(Context.MODE_PRIVATE).getString("email", "null"))
+        if (persistantlogin != null) {
+            val logedin = persistantlogin.getString("logedin", "null")
+            if (logedin != "null" && logedin == "true") {
+                val logedEmail = persistantlogin.getString("email", "null")
+                if (logedEmail != "null") {
+                    sharedPref =
+                        getSharedPreferences("${packageName}.$logedEmail", Context.MODE_PRIVATE)
+                    login()
+                }
+            }
+        }
 
         val login = findViewById<TextView>(R.id.login)
         login.setOnClickListener {
@@ -39,6 +55,14 @@ class MainActivity : AppCompatActivity() {
                     ) == password.toString()
                 ) {
                     //password matched
+                    persistantlogin = this.getPreferences(Context.MODE_PRIVATE)
+                    persistantlogin.edit {
+                        putString("logedin", "true")
+                        putString("email", email.toString())
+                    }
+                    getSharedPreferences(packageName, Context.MODE_PRIVATE).edit {
+                        putString("email", email.toString())
+                    }
                     login()
                 } else {
                     //Password doesn't match

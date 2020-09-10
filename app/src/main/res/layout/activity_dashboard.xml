@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Dashboard">
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        app:fabSize="normal"
+        app:maxImageSize="50dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -22,28 +35,64 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
+        android:id="@+id/dashboard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Dashboard">
 
-        <TextView
-            android:id="@+id/welcome"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            android:gravity="center"
-            android:text="@string/welcome"
-            android:textSize="40sp" />
+            android:layout_marginTop="70dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="@string/welcome"
+                android:textSize="24sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/welcome"
+                android:gravity="center"
+                android:text="Username"
+                android:textSize="30sp" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/userName"
+            android:id="@+id/newtextview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/welcome"
+            android:layout_below="@+id/linearlayout"
+            android:layout_marginTop="80dp"
             android:gravity="center"
-            android:textSize="25sp" />
+            android:text="No contacts added"
+            android:textSize="20dp"
+            android:visibility="gone" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearlayout"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/cardview_shadow_end_color">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
     </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
