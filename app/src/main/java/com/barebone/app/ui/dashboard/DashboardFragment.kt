@@ -1,7 +1,6 @@
-package com.barebone.app
+package com.barebone.app.ui.dashboard
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,35 +10,68 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.barebone.app.*
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Dashboard : AppCompatActivity() {
+private const val ARG_PARAM1 = "userId"
+private const val ARG_PARAM2 = "param2"
+
+class DashboardFragment : Fragment() {
+
     var db: Barebonedb? = null
     var dao: UserDao? = null
     var userList: ArrayList<ModelUser> = ArrayList()
+    lateinit var root: View
+
+    private lateinit var dashboardViewModel: DashboardViewModel
+
+    // TODO: Rename and change types of parameters
+    private var param1: Int? = null
+    private var param2: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var persistantlogin = getSharedPreferences(packageName, Context.MODE_PRIVATE)
+        arguments?.let {
+            param1 = it.getInt(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        dashboardViewModel =
+            ViewModelProviders.of(this).get(DashboardViewModel::class.java)
+        root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+
+        var persistantlogin =
+            root.context.getSharedPreferences(root.context.packageName, Context.MODE_PRIVATE)
         Log.d("sp", persistantlogin.getString("email", "null"))
-        setContentView(R.layout.activity_dashboard)
-        var sp = getSharedPreferences(
-            "${packageName}.${persistantlogin.getString("email", "null")}",
+//        setContentView(R.layout.activity_dashboard)
+        var sp = root.context.getSharedPreferences(
+            "${root.context.packageName}.${persistantlogin.getString("email", "null")}",
             Context.MODE_PRIVATE
         )
         Log.d("sp", sp.getString("name", "null"))
         var name = sp.getString("name", "null")
 
-        findViewById<MaterialTextView>(R.id.userName).text = name
+        root.findViewById<MaterialTextView>(R.id.userName).text = name
 
 
-        db = Barebonedb.getAppDatabase(context = this)
+        db = Barebonedb.getAppDatabase(context = root.context)
         dao = db?.userDao()
 
         val user = ModelUser(name = "User 1", mobile = "1234567")
@@ -57,36 +89,36 @@ class Dashboard : AppCompatActivity() {
         }
 
 
-        var recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        var recyclerView = root.findViewById<RecyclerView>(R.id.recyclerView)
         if (userList.isEmpty()) {
             recyclerView.visibility = View.GONE
-            var newTextView: TextView = findViewById(R.id.newtextview)
+            var newTextView: TextView = root.findViewById(R.id.newtextview)
             newTextView.visibility = View.VISIBLE
 
         } else {
 
             recyclerView.visibility = View.VISIBLE
-            var newTextView: TextView = findViewById(R.id.newtextview)
+            var newTextView: TextView = root.findViewById(R.id.newtextview)
             newTextView.visibility = View.GONE
             var adapter = UserListAdapter(this)
 
             recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.layoutManager = LinearLayoutManager(root.context)
         }
 
 
-//        findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
-//
-//            var newEntryIntent = Intent(this, AddEdit::class.java)
-//            startActivity(newEntryIntent)
+//        root.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
+//            root.findNavController().navigate(R.id.addEditFragment)
+////            var newEntryIntent = Intent(this, AddEdit::class.java)
+////            startActivity(newEntryIntent)
 //        }
 
-
+        return root
     }
+
 }
 
-
-class UserListAdapter(private val appContext: Dashboard) :
+class UserListAdapter(private val appContext: DashboardFragment) :
     RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
     class ViewHolder(listView: View) : RecyclerView.ViewHolder(listView) {
         val nameTextView = itemView.findViewById<MaterialTextView>(R.id.view_name)
@@ -117,15 +149,27 @@ class UserListAdapter(private val appContext: Dashboard) :
         mobile.text = user.mobile
         val edit = viewHolder.editButton
         edit.setOnClickListener {
-            var editIntent = Intent(appContext.applicationContext, AddEdit::class.java)
-            editIntent.putExtra("userId", appContext.userList[position].id)
-            appContext.startActivity(editIntent)
+
+
+            val addEdit = AddEditFragment()
+            appContext.userList[position].id?.let { it1 ->
+                addEdit.arguments?.putInt(
+                    "userId",
+                    it1
+                )
+            }
+            var bundle = bundleOf("userId" to appContext.userList[position].id)
+            Navigation.findNavController(appContext.root).navigate(R.id.addEditFragment, bundle)
+
+//            var editIntent = Intent(appContext.root.context, AddEdit::class.java)(R.id.addEditFragment).
+//            editIntent.putExtra("userId", appContext.userList[position].id)
+//            appContext.startActivity(editIntent)
         }
         val delete = viewHolder.deleteButton
         delete.setOnClickListener {
 
 
-            val builder = AlertDialog.Builder(appContext)
+            val builder = AlertDialog.Builder(appContext.root.context)
             //set title for alert dialog
             builder.setTitle(R.string.dialogTitle)
             //set message for alert dialog
@@ -136,7 +180,7 @@ class UserListAdapter(private val appContext: Dashboard) :
             builder.setPositiveButton("Yes") { dialogInterface, which ->
                 run {
                     Toast.makeText(
-                        appContext.applicationContext,
+                        appContext.root.context,
                         "contact deleted",
                         Toast.LENGTH_LONG
                     )
@@ -147,12 +191,12 @@ class UserListAdapter(private val appContext: Dashboard) :
                     this.notifyDataSetChanged()
                     if (appContext.userList.isEmpty()) {
                         appContext.recyclerView.visibility = View.GONE
-                        var newTextView: TextView = appContext.findViewById(R.id.newtextview)
+                        var newTextView: TextView = appContext.root.findViewById(R.id.newtextview)
                         newTextView.visibility = View.VISIBLE
 
                     } else {
                         appContext.recyclerView.visibility = View.VISIBLE
-                        var newTextView: TextView = appContext.findViewById(R.id.newtextview)
+                        var newTextView: TextView = appContext.root.findViewById(R.id.newtextview)
                         newTextView.visibility = View.GONE
 
                     }
@@ -160,7 +204,7 @@ class UserListAdapter(private val appContext: Dashboard) :
             }
             //performing negative action
             builder.setNegativeButton("No") { dialogInterface, which ->
-                Toast.makeText(appContext.applicationContext, "cancel", Toast.LENGTH_LONG).show()
+                Toast.makeText(appContext.root.context, "cancel", Toast.LENGTH_LONG).show()
             }
             // Create the AlertDialog
             val alertDialog: AlertDialog = builder.create()

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1018195411124",
+    "firebase_url": "https://goldfarm-staging-8028b.firebaseio.com",
+    "project_id": "goldfarm-staging-8028b",
+    "storage_bucket": "goldfarm-staging-8028b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018195411124:android:007e94dc2be2c32487d7e1",
+        "android_client_info": {
+          "package_name": "com.barebone.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018195411124-a2ffjl46pmem12bgadhqkv09mo7tkqab.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.barebone.app",
+            "certificate_hash": "dee7bfa0ef64ce78147d3e5391d1ca3be4dcecef"
+          }
+        },
+        {
+          "client_id": "1018195411124-9jahkegfrl5hs1pb14v4n33thktp4lin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrdyT6QlYiiarS_wxhyZ2KNYlHk3Xqkdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018195411124-9jahkegfrl5hs1pb14v4n33thktp4lin.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

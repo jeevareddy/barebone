@@ -109,7 +109,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        val intent = Intent(this, Dashboard::class.java)
+//        val intent = Intent(this, Dashboard::class.java)
+        val intent = Intent(this, BottomNav::class.java)
         intent.putExtra(
             "name", sharedPref.getString(
                 "name",
