@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-    <!--        android:id="@+id/floatingActionButton"-->
-    <!--        app:fabSize="normal"-->
-    <!--        app:maxImageSize="50dp"-->
-    <!--        app:srcCompat="@android:drawable/ic_input_add"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_gravity="bottom|right"-->
-    <!--        android:layout_margin="10dp"-->
-    <!--        android:clickable="true" />-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:fabSize="normal"
+        app:maxImageSize="50dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
     <!--    <com.google.android.material.appbar.AppBarLayout-->
     <!--        android:layout_width="match_parent"-->
@@ -51,7 +53,7 @@
                 android:id="@+id/welcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:gravity="center"
                 android:text="@string/welcome"
                 android:textSize="24sp" />
@@ -68,23 +70,33 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/listTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearlayout"
+            android:layout_marginStart="10dp"
+            android:text="@string/contact_list"
+            android:textSize="18sp" />
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/newtextview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linearlayout"
+            android:layout_below="@+id/listTitle"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="80dp"
             android:gravity="center"
-            android:text="No contacts added"
-            android:textSize="20dp"
+            android:text="@string/no_contacts_added"
+            android:textSize="25sp"
             android:visibility="gone" />
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linearlayout"
+            android:layout_below="@+id/listTitle"
             android:layout_margin="10dp"
             android:backgroundTint="@color/cardview_shadow_end_color">
 

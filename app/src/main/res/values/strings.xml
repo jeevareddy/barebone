@@ -3,7 +3,6 @@
     <string name="LOGINtext">LOGIN</string>
     <string name="Email">Email</string>
     <string name="Password">Password</string>
-    <string name="emailController">emailController</string>
     <string name="pleaseLoginText">Please login to your account</string>
     <string name="forgotPasswordText">Forgot Password?</string>
     <string name="ORtext">OR</string>
@@ -16,34 +15,38 @@
     <string name="confirmPasswordText">Confirm Password</string>
     <string name="alreadyHaveAccountText">Already have an account? </string>
     <string name="LoginText">Login</string>
-    <string name="defaultValue">null</string>
+    <string name="defaultValue" translatable="false">null</string>
     <string name="Gender">Gender</string>
     <string-array name="genderList">
         <item isEmabled="false">-Select gender-</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <string-array name="languageList">
+        <item>English</item>
+        <item>Arabic</item>
+    </string-array>
     <string name="title_activity_dashboard">Dashboard</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="welcome">Welcome,    </string>
     <string name="ForgotPassword">Forgot Password</string>
     <string name="validate">Validate</string>
-    <string name="editText">Edit</string>
     <string name="dialogTitle">Delete</string>
-    <string name="title_activity_navigation">navigation</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_bottom_nav">MainActivity</string>
-    <string name="title_home">Home</string>
+    <string name="title_activity_bottom_nav" translatable="false">MainActivity</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="Add">Add</string>
+    <string name="contact_list">Contacts List</string>
+    <string name="no_contacts_added">No contacts added</string>
+    <string name="settings">Settings</string>
+    <string name="language">Language</string>
+    <string name="new_contact">New Contact</string>
+    <string name="map">Map</string>
+    <string name="editContact">Edit Contact</string>
+    <string name="save">SAVE</string>
+    <string name="confirmToDelete">Confirm to delete</string>
+    <string name="noNewNotifications">No New Notifications</string>
+    <string name="search">Search</string>
 
 </resources>

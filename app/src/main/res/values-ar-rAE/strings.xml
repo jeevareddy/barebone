@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Barebone</string>
+    <string name="LOGINtext">تسجيل الدخول</string>
+    <string name="Email">البريد الإلكتروني</string>
+    <string name="Password">كلمه السر</string>
+    <string name="pleaseLoginText">يرجى تسجيل الدخول إلى حسابك</string>
+    <string name="forgotPasswordText">هل نسيت كلمة المرور؟</string>
+    <string name="ORtext">أو</string>
+    <string name="dontHaveAnAccount">ليس لديك حساب؟</string>
+    <string name="registerText">تسجيل</string>
+    <string name="REGISTERText">تسجيل</string>
+    <string name="pleaseRegister">الرجاء إدخال التفاصيل للتسجيل</string>
+    <string name="NameText">اسم</string>
+    <string name="MobileNumberText">رقم الهاتف المحمول</string>
+    <string name="confirmPasswordText">تأكيد كلمة المرور</string>
+    <string name="alreadyHaveAccountText">هل لديك حساب؟</string>
+    <string name="LoginText">تسجيل الدخول</string>
+    <string name="Gender">جنس</string>
+    <string name="title_activity_dashboard">لوحة القيادة</string>
+    <string name="welcome">أهلا بك،</string>
+    <string name="ForgotPassword">هل نسيت كلمة المرور</string>
+    <string name="validate">تحقق</string>
+    <string name="dialogTitle">حذف</string>
+    <string name="title_dashboard">لوحة القيادة</string>
+    <string name="title_notifications">إشعارات</string>
+    <string name="Add">أضف</string>
+    <string name="contact_list">قائمة جهات الاتصال</string>
+    <string name="no_contacts_added">لم تتم إضافة جهات اتصال</string>
+    <string name="settings">إعدادات</string>
+    <string name="language">لغة</string>
+    <string name="new_contact">جهة اتصال جديدة</string>
+    <string name="map">خريطة</string>
+    <string name="editContact">تحرير جهة الاتصال</string>
+    <string name="save">حفظ</string>
+    <string name="confirmToDelete">أكد للحذف</string>
+    <string name="noNewNotifications">لا يوجد إشعارات جديدة</string>
+</resources>

@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:gravity="center_vertical"
     tools:context=".AddEdit">
 
 
-<!--    <com.google.android.material.appbar.AppBarLayout-->
+    <!--    <com.google.android.material.appbar.AppBarLayout-->
     <!--        android:layout_width="match_parent"-->
     <!--        android:layout_height="wrap_content"-->
     <!--        android:theme="@style/AppTheme.AppBarOverlay">-->
@@ -21,6 +22,15 @@
     <!--            app:title="Edit" />-->
 
     <!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/design_default_color_surface"
+        android:foregroundGravity="left|top"
+        android:padding="20dp"
+        android:src="@drawable/ic_back" />
 
 
     <LinearLayout
@@ -43,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:minWidth="60dp"
                 android:minHeight="60dp"
+                android:contentDescription="@string/new_contact"
                 android:src="@drawable/ic_person_add" />
 
 
@@ -50,9 +61,9 @@
                 android:id="@+id/aeTittle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginBottom="1dp"
-                android:text="New Contact"
+                android:text="@string/new_contact"
                 android:textSize="30sp"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -99,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="#2196F3"
-            android:text="ADD"
+            android:text="@string/Add"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 

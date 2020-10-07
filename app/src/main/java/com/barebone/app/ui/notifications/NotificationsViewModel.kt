@@ -1,13 +1,11 @@
 package com.barebone.app.ui.notifications
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class NotificationsViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "No New Notifications"
-    }
-    val text: LiveData<String> = _text
+//    private val _text = MutableLiveData<String>().apply {
+//        value = context.getString(R.string.noNewNotifications)
+//    }
+//    val text: LiveData<String> = _text
 }

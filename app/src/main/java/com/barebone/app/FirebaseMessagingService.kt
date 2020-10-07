@@ -32,6 +32,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         // If you want to fire a local notification (that notification on the top of the phone screen)
         // you should fire it from here
 
+
         sendLocalNotification(notificationTitle, notificationBody)
     }
 

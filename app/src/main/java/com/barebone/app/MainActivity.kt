@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var sp = getSharedPreferences(packageName, Context.MODE_PRIVATE)
+        var lc = sp.getString("locale", "null")
+        if (lc == "null") lc = "en"
+        val locale = Locale(lc)
+        val res = resources
+        val dm = res.displayMetrics
+        val conf = res.configuration
+        conf.locale = locale
+        res.updateConfiguration(conf, dm)
         setContentView(R.layout.activity_main)
 
         var persistantlogin = this.getPreferences(Context.MODE_PRIVATE)

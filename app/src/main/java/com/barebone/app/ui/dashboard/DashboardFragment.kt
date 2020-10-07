@@ -1,6 +1,7 @@
 package com.barebone.app.ui.dashboard
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,13 +11,12 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.barebone.app.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import java.util.*
@@ -31,6 +31,7 @@ class DashboardFragment : Fragment() {
     var dao: UserDao? = null
     var userList: ArrayList<ModelUser> = ArrayList()
     lateinit var root: View
+    lateinit var adapter: UserListAdapter
 
     private lateinit var dashboardViewModel: DashboardViewModel
 
@@ -74,7 +75,6 @@ class DashboardFragment : Fragment() {
         db = Barebonedb.getAppDatabase(context = root.context)
         dao = db?.userDao()
 
-        val user = ModelUser(name = "User 1", mobile = "1234567")
         val observable = Observable()
 
         observable.run {
@@ -100,20 +100,35 @@ class DashboardFragment : Fragment() {
             recyclerView.visibility = View.VISIBLE
             var newTextView: TextView = root.findViewById(R.id.newtextview)
             newTextView.visibility = View.GONE
-            var adapter = UserListAdapter(this)
+            adapter = UserListAdapter(this)
 
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(root.context)
         }
 
 
-//        root.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
+        root.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
 //            root.findNavController().navigate(R.id.addEditFragment)
-////            var newEntryIntent = Intent(this, AddEdit::class.java)
-////            startActivity(newEntryIntent)
-//        }
+            var newEntryIntent = Intent(root.context, AddEdit::class.java)
+            startActivityForResult(newEntryIntent, 1)
+
+        }
 
         return root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.d("Res_Act", requestCode.toString())
+        userList.clear()
+        dao?.getUsers()?.forEach { e ->
+            run {
+                Log.d("obs", e.name)
+                userList.add(e)
+            }
+        }
+        adapter.notifyDataSetChanged()
+        recyclerView.adapter = adapter
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }
@@ -151,19 +166,19 @@ class UserListAdapter(private val appContext: DashboardFragment) :
         edit.setOnClickListener {
 
 
-            val addEdit = AddEditFragment()
-            appContext.userList[position].id?.let { it1 ->
-                addEdit.arguments?.putInt(
-                    "userId",
-                    it1
-                )
-            }
-            var bundle = bundleOf("userId" to appContext.userList[position].id)
-            Navigation.findNavController(appContext.root).navigate(R.id.addEditFragment, bundle)
+//            val addEdit = AddEditFragment()
+//            appContext.userList[position].id?.let { it1 ->
+//                addEdit.arguments?.putInt(
+//                    "userId",
+//                    it1
+//                )
+//            }
+//            var bundle = bundleOf("userId" to appContext.userList[position].id)
+//            Navigation.findNavController(appContext.root).navigate(R.id.addEditFragment, bundle)
 
-//            var editIntent = Intent(appContext.root.context, AddEdit::class.java)(R.id.addEditFragment).
-//            editIntent.putExtra("userId", appContext.userList[position].id)
-//            appContext.startActivity(editIntent)
+            var editIntent = Intent(appContext.root.context, AddEdit::class.java)
+            editIntent.putExtra("userId", appContext.userList[position].id)
+            appContext.startActivityForResult(editIntent, 1)
         }
         val delete = viewHolder.deleteButton
         delete.setOnClickListener {
@@ -173,7 +188,7 @@ class UserListAdapter(private val appContext: DashboardFragment) :
             //set title for alert dialog
             builder.setTitle(R.string.dialogTitle)
             //set message for alert dialog
-            builder.setMessage("Confirm to delete ${name.text}")
+            builder.setMessage(appContext.root.context.getString(R.string.confirmToDelete) + name.text)
             builder.setIcon(android.R.drawable.ic_dialog_alert)
 
             //performing positive action
@@ -214,6 +229,7 @@ class UserListAdapter(private val appContext: DashboardFragment) :
 
         }
     }
+
 
     // Returns the total count of items in the list
     override fun getItemCount(): Int {

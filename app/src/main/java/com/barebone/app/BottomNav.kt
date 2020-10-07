@@ -2,7 +2,10 @@ package com.barebone.app
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -12,6 +15,7 @@ class BottomNav : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_bottom_nav)
         var persistantlogin = getSharedPreferences(packageName, Context.MODE_PRIVATE)
 
@@ -22,7 +26,10 @@ class BottomNav : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_dashboard, R.id.addEditFragment, R.id.navigation_notifications
+                R.id.navigation_dashboard,
+                R.id.map,
+                R.id.navigation_notifications,
+                R.id.settingsFragment
             )
         )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
@@ -32,6 +39,12 @@ class BottomNav : AppCompatActivity() {
         toolbar.setTitleTextColor(resources.getColor(R.color.white))
 
         navView.setupWithNavController(navController)
-
+        navController.addOnDestinationChangedListener { navController: NavController, navDestination: NavDestination, bundle: Bundle? ->
+            if (navDestination.label == "Maps") {
+                toolbar.visibility = View.GONE
+            } else {
+                toolbar.visibility = View.VISIBLE
+            }
+        }
     }
 }
