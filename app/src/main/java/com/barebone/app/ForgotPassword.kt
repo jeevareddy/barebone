@@ -26,8 +26,11 @@ class ForgotPassword : AppCompatActivity() {
             resources.getString(R.string.defaultValue)
         )
         val forgotPasPhrase: TextView = findViewById(R.id.enterMobileNumber)
+        // Use takeLast instead of a fixed subSequence(6, 10) range: stored mobile numbers
+        // shorter than 10 characters (e.g. bad data, or the "null" default fallback) would
+        // otherwise throw StringIndexOutOfBoundsException as soon as this screen opens.
         val sourceString = "Enter your mobile number ending with " + "<b>" + "******${
-            actualMobileNumber.toString().subSequence(6, 10)
+            actualMobileNumber.orEmpty().takeLast(4)
         }" + "</b>"
         forgotPasPhrase.text = Html.fromHtml(sourceString)
 
